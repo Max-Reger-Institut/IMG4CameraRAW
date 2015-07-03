@@ -1,7 +1,7 @@
 #!/usr/bin/env python2.7
 # -*- coding: utf8 -*-
 
-# Frank Zalkow, 2014
+# Frank Zalkow
 
 import argparse
 import subprocess
