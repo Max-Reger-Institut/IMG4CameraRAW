@@ -27,7 +27,6 @@ Some images cannot be opened with Adobe Camera Raw (Adobe CS3). For those cases 
 * [Python 2](https://www.python.org/)
 * [ImageMagick](http://www.imagemagick.org)
 * [exiv2](http://www.exiv2.org)
-* [sips](https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/sips.1.html)
 
 ## License
 

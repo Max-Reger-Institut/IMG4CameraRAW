@@ -27,10 +27,8 @@ def convert(infile, outfile):
 			
 	tmpfile = deconstructed_files[maxidx]
 
-	identify = call("sips -g pixelHeight -g pixelWidth %s" % (tmpfile, ))
-	identify = identify.split("\n")
-	x = identify[2].split(" ")[-1]
-	y = identify[1].split(" ")[-1]
+	identify = call('identify -format "%%[fx:w]\n%%[fx:h]" %s' % tmpfile)
+	x, y = identify.split("\n")
 	
 	call("convert %s -flatten -alpha off %s" % (tmpfile, outfile))
 	call('exiv2 -M\"set Exif.Photo.PixelXDimension Long %s\" -M\"set Exif.Photo.PixelYDimension Long %s\" %s' % (x, y, outfile))
@@ -56,11 +54,11 @@ def main():
 
 	# check everything is ok
 	if call("which convert") == "":
-		raise RuntimeError("convert from ImageMagick must be installed... (http://www.imagemagick.org/)")
+		raise RuntimeError("ImageMagick must be installed... (http://www.imagemagick.org/) and convert must be available via PATH")
+	if call("which identify") == "":
+		raise RuntimeError("ImageMagick must be installed... (http://www.imagemagick.org/) and identify must be available via PATH")
 	if call("which exiv2") == "":
-		raise RuntimeError("exiv2 must be installed... (http://www.exiv2.org/)")
-	if call("which exiv2") == "":
-		raise RuntimeError("sips must be installed... (https://developer.apple.com/library/mac/documentation/Darwin/Reference/ManPages/man1/sips.1.html)")
+		raise RuntimeError("exiv2 must be installed and available via PATH... (http://www.exiv2.org/)")
 	if args.output == args.input:
 		raise RuntimeError("infolder must be different from outfolder...")
 
